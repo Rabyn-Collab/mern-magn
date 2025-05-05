@@ -1,11 +1,13 @@
-import { Button, IconButton, Input } from '@material-tailwind/react'
+import { Button, IconButton, Input, Typography } from '@material-tailwind/react'
 import { Formik } from 'formik'
 import React, { useState } from 'react'
 import { useUserLoginMutation } from './authApi';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router';
 
 export default function Login() {
 
+  const nav = useNavigate();
   const [userLogin, { isLoading }] = useUserLoginMutation();
   const [show, setShow] = useState(false);
   return (
@@ -68,6 +70,15 @@ export default function Login() {
           </form>
         )}
       </Formik>
+
+      <Typography color="gray" className="mt-6 text-center font-normal">
+        Don't have an account?{" "}
+        <Button
+          onClick={() => nav('/signup')}
+          variant='text' className="font-medium text-gray-900 px-2">
+          Sign Up
+        </Button>
+      </Typography>
 
     </div>
   )
