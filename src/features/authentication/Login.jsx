@@ -1,9 +1,12 @@
 import { Button, IconButton, Input } from '@material-tailwind/react'
 import { Formik } from 'formik'
 import React, { useState } from 'react'
+import { useUserLoginMutation } from './authApi';
+import toast from 'react-hot-toast';
 
 export default function Login() {
 
+  const [userLogin, { isLoading }] = useUserLoginMutation();
   const [show, setShow] = useState(false);
   return (
     <div className='max-w-[400px]'>
@@ -13,7 +16,14 @@ export default function Login() {
           email: '',
           password: ''
         }}
-        onSubmit={() => {
+        onSubmit={async (val) => {
+          try {
+            await userLogin(val).unwrap();
+            toast.success('successfully login')
+          } catch (err) {
+            console.log(err);
+            toast.error(err.data?.message || err.data)
+          }
 
         }}
       >
@@ -28,6 +38,9 @@ export default function Login() {
             </div>
             <div className="relative flex w-full ">
               <Input
+                onChange={handleChange}
+                name='password'
+                value={values.password}
                 type={show ? "text" : "password"}
                 label="Password"
                 className="pr-20"
@@ -35,6 +48,7 @@ export default function Login() {
                   className: "min-w-0",
                 }}
               />
+
 
               <IconButton
                 onClick={() => setShow(!show)}
@@ -48,7 +62,7 @@ export default function Login() {
 
             </div>
 
-            <Button type='submit'>Submit</Button>
+            <Button loading={isLoading} type='submit'>Submit</Button>
 
 
           </form>
