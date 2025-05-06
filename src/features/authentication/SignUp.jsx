@@ -24,9 +24,9 @@ export default function SignUp() {
         onSubmit={async (val) => {
           try {
             await userSignUp(val).unwrap();
-            toast.success('successfully login')
+            toast.success('successfully registered');
+            nav(-1);
           } catch (err) {
-            console.log(err);
             toast.error(err.data?.message || err.data)
           }
 

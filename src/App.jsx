@@ -4,6 +4,7 @@ import RootLayout from './components/RootLayout';
 import { RouterProvider } from 'react-router-dom';
 import Login from './features/authentication/Login';
 import SignUp from './features/authentication/SignUp';
+import ProductList from './features/products/ProductList';
 
 
 export default function App() {
@@ -16,12 +17,18 @@ export default function App() {
       children: [
         {
           index: true,
+          element: <ProductList />
+
+        },
+
+        {
+          path: 'login',
           element: <Login />
 
         },
 
         {
-          path: '/signup',
+          path: 'signup',
           element: <SignUp />
 
         },

@@ -4,12 +4,14 @@ import React, { useState } from 'react'
 import { useUserLoginMutation } from './authApi';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../user/userSlice';
 
 export default function Login() {
-
-  const nav = useNavigate();
   const [userLogin, { isLoading }] = useUserLoginMutation();
+  const nav = useNavigate();
   const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
   return (
     <div className='max-w-[400px]'>
 
@@ -20,10 +22,10 @@ export default function Login() {
         }}
         onSubmit={async (val) => {
           try {
-            await userLogin(val).unwrap();
+            const response = await userLogin(val).unwrap();
+            dispatch(setUser(response));
             toast.success('successfully login')
           } catch (err) {
-            console.log(err);
             toast.error(err.data?.message || err.data)
           }
 
