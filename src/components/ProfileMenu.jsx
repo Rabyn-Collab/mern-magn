@@ -2,30 +2,24 @@ import React, { useState } from 'react'
 import {
   UserCircleIcon,
   ChevronDownIcon,
-  Cog6ToothIcon,
-  InboxArrowDownIcon,
-  LifebuoyIcon,
+  QueueListIcon,
+  ShoppingCartIcon,
   PowerIcon,
 } from "@heroicons/react/24/solid";
 import { Avatar, Button, Menu, MenuHandler, MenuItem, MenuList, Typography } from '@material-tailwind/react';
+import { useDispatch } from 'react-redux';
+import { removeUser } from '../features/user/userSlice';
 
-// profile menu component
-const profileMenuItems = [
+// admin profile menu component
+const adminMenuItems = [
   {
-    label: "My Profile",
+    label: "Profile",
     icon: UserCircleIcon,
   },
+
   {
-    label: "Edit Profile",
-    icon: Cog6ToothIcon,
-  },
-  {
-    label: "Inbox",
-    icon: InboxArrowDownIcon,
-  },
-  {
-    label: "Help",
-    icon: LifebuoyIcon,
+    label: "Product-list",
+    icon: QueueListIcon,
   },
   {
     label: "Sign Out",
@@ -33,11 +27,29 @@ const profileMenuItems = [
   },
 ];
 
-export default function ProfileMenu() {
+// admin profile menu component
+const userMenuItems = [
+  {
+    label: "Profile",
+    icon: UserCircleIcon,
+  },
 
+  {
+    label: "Cart",
+    icon: ShoppingCartIcon,
+  },
+  {
+    label: "Sign Out",
+    icon: PowerIcon,
+  },
+];
+
+export default function ProfileMenu({ user }) {
+  const dispatch = useDispatch();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const closeMenu = () => setIsMenuOpen(false);
+  const profileMenuItems = user?.role === 'Admin' ? adminMenuItems : userMenuItems;
+
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
       <MenuHandler>
@@ -66,7 +78,17 @@ export default function ProfileMenu() {
           return (
             <MenuItem
               key={label}
-              onClick={closeMenu}
+              onClick={() => {
+
+                switch (label) {
+                  case 'Sign Out':
+                    dispatch(removeUser());
+
+
+                    closeMenu();
+                }
+
+              }}
               className={`flex items-center gap-2 rounded ${isLastItem
                 ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
                 : ""

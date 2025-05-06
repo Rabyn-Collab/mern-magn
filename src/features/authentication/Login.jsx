@@ -24,7 +24,8 @@ export default function Login() {
           try {
             const response = await userLogin(val).unwrap();
             dispatch(setUser(response));
-            toast.success('successfully login')
+            toast.success('successfully login');
+            nav(-1);
           } catch (err) {
             toast.error(err.data?.message || err.data)
           }
