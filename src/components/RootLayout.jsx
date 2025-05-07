@@ -7,7 +7,7 @@ export default function RootLayout() {
     <div>
       <Header />
 
-      <main className='p-5'>
+      <main className='px-12'>
         <Outlet />
       </main>
 

@@ -84,7 +84,6 @@ export default function ProfileMenu({ user }) {
                   case 'Sign Out':
                     dispatch(removeUser());
 
-
                     closeMenu();
                 }
 
