@@ -23,10 +23,13 @@ export const productApi = mainApi.injectEndpoints({
     }),
 
     addProduct: builder.mutation({
-      query: (body) => ({
+      query: (query) => ({
         url: '/products',
         method: 'POST',
-        body: body
+        body: query.body,
+        headers: {
+          Authorization: query.token
+        }
       })
     }),
 

@@ -3,11 +3,13 @@ import { Formik } from 'formik'
 import React from 'react'
 import { useAddProductMutation } from '../products/productApi';
 import toast from 'react-hot-toast';
+import { useSelector } from 'react-redux';
 
 
 export default function ProductAddForm() {
 
   const [addProduct, { isLoading }] = useAddProductMutation();
+  const { user } = useSelector((state) => state.userSlice);
 
   return (
     <div className='max-w-[400px] mt-10'>
@@ -31,7 +33,10 @@ export default function ProductAddForm() {
           formData.append('category', val.category);
           formData.append('brand', val.brand);
           try {
-            await addProduct(formData).unwrap();
+            await addProduct({
+              body: formData,
+              token: user.token
+            }).unwrap();
             toast.success('successfully added');
           } catch (err) {
             toast.error(err.data?.message || err.data)
@@ -40,7 +45,7 @@ export default function ProductAddForm() {
 
         }}
       >
-        {({ handleSubmit, handleChange, touched, values, }) => (
+        {({ handleSubmit, handleChange, touched, values, setFieldValue }) => (
           <form onSubmit={handleSubmit} className='space-y-6'>
             <div>
               <Input
@@ -59,7 +64,9 @@ export default function ProductAddForm() {
 
 
             <div>
-              <Select label="Select Category">
+              <Select
+                onChange={(e) => setFieldValue('category', e)}
+                label="Select Category">
                 <Option value="men's clothing">Men's Clothing</Option>
                 <Option value="women's clothing">Women's Clothing</Option>
                 <Option value="jewelery">Jewelery</Option>
@@ -68,7 +75,9 @@ export default function ProductAddForm() {
               </Select>
             </div>
             <div >
-              <Select label="Select Brand">
+              <Select
+                onChange={(e) => setFieldValue('brand', e)}
+                label="Select Brand">
                 <Option value='Apple'>Apple</Option>
                 <Option value='Samsung'>Samsung</Option>
                 <Option value='Addidas'> Addidas</Option>
@@ -86,7 +95,10 @@ export default function ProductAddForm() {
             <div>
               <Input
                 label='Image'
-                onChange={handleChange}
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  setFieldValue('image', file);
+                }}
                 name='image'
                 type='file'
               />
@@ -95,7 +107,7 @@ export default function ProductAddForm() {
 
 
 
-            <Button type='submit'>Submit</Button>
+            <Button loading={isLoading} type='submit'>Submit</Button>
 
 
           </form>
