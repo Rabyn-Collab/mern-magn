@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import {
   UserCircleIcon,
   ChevronDownIcon,
-  QueueListIcon,
+  DocumentChartBarIcon,
   ShoppingCartIcon,
   PowerIcon,
 } from "@heroicons/react/24/solid";
 import { Avatar, Button, Menu, MenuHandler, MenuItem, MenuList, Typography } from '@material-tailwind/react';
 import { useDispatch } from 'react-redux';
 import { removeUser } from '../features/user/userSlice';
+import { useNavigate } from 'react-router';
 
 // admin profile menu component
 const adminMenuItems = [
@@ -18,8 +19,8 @@ const adminMenuItems = [
   },
 
   {
-    label: "Product-list",
-    icon: QueueListIcon,
+    label: "Admin Dashboard",
+    icon: DocumentChartBarIcon,
   },
   {
     label: "Sign Out",
@@ -45,6 +46,7 @@ const userMenuItems = [
 ];
 
 export default function ProfileMenu({ user }) {
+  const nav = useNavigate();
   const dispatch = useDispatch();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const closeMenu = () => setIsMenuOpen(false);
@@ -84,6 +86,8 @@ export default function ProfileMenu({ user }) {
                   case 'Sign Out':
                     dispatch(removeUser());
 
+                  case 'Admin Dashboard':
+                    nav('/admin-page');
                     closeMenu();
                 }
 
