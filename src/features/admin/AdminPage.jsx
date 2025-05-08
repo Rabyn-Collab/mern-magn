@@ -2,6 +2,7 @@ import React from 'react'
 import { useGetProductsQuery } from '../products/productApi';
 import { Avatar, Button, Card, IconButton, Typography } from "@material-tailwind/react";
 import { baseUrl } from '../../app/mainApi';
+import { NavLink } from 'react-router';
 
 
 
@@ -9,6 +10,7 @@ const TABLE_HEAD = ["image", "tItle", "_id", "edit", "delete"];
 
 
 export default function AdminPage() {
+
   const { isLoading, error, data } = useGetProductsQuery();
 
   if (isLoading) return <h1>Loading...</h1>
@@ -20,7 +22,10 @@ export default function AdminPage() {
     <div className=''>
 
       <div className='flex justify-end my-5'>
-        <Button color='purple'>Add Product</Button>
+        <NavLink to={'/add-product'}>
+          <Button color='purple'>Add Product</Button>
+        </NavLink>
+
       </div>
 
 

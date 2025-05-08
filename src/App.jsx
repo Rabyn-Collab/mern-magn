@@ -6,6 +6,7 @@ import Login from './features/authentication/Login';
 import SignUp from './features/authentication/SignUp';
 import HomePage from './features/home/HomePage';
 import AdminPage from './features/admin/AdminPage';
+import ProductAddForm from './features/admin/ProductAddForm';
 
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
         { path: 'login', element: <Login /> },
         { path: 'signup', element: <SignUp /> },
         { path: 'admin-page', element: <AdminPage /> },
+        { path: 'add-product', element: <ProductAddForm /> },
 
       ]
     }

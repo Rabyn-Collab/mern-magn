@@ -20,11 +20,19 @@ export const productApi = mainApi.injectEndpoints({
         method: 'GET',
 
       })
-    })
+    }),
+
+    addProduct: builder.mutation({
+      query: (body) => ({
+        url: '/products',
+        method: 'POST',
+        body: body
+      })
+    }),
 
   })
 
 });
 
 
-export const { useGetProductsQuery, useGetTop5ProductsQuery } = productApi;
+export const { useGetProductsQuery, useGetTop5ProductsQuery, useAddProductMutation } = productApi;
