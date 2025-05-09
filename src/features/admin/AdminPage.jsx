@@ -3,6 +3,7 @@ import { useGetProductsQuery } from '../products/productApi';
 import { Avatar, Button, Card, IconButton, Typography } from "@material-tailwind/react";
 import { baseUrl } from '../../app/mainApi';
 import { NavLink } from 'react-router';
+import RemoveButton from './RemoveButton';
 
 
 
@@ -12,6 +13,7 @@ const TABLE_HEAD = ["image", "tItle", "_id", "edit", "delete"];
 export default function AdminPage() {
 
   const { isLoading, error, data } = useGetProductsQuery();
+
 
   if (isLoading) return <h1>Loading...</h1>
 
@@ -91,9 +93,8 @@ export default function AdminPage() {
                   </td>
 
                   <td className={classes}>
-                    <IconButton size='sm' color='pink'>
-                      <i className="fas fa-trash" />
-                    </IconButton>
+                    <RemoveButton id={_id} />
+
                   </td>
                 </tr>
               );
