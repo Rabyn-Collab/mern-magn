@@ -4,6 +4,7 @@ import { useAddProductMutation } from '../products/productApi';
 import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
+import { useNavigate } from 'react-router';
 
 export const productSchema = Yup.object().shape({
   title: Yup.string().required('title is required'),
@@ -18,7 +19,7 @@ export const productSchema = Yup.object().shape({
 })
 
 export default function ProductAddForm() {
-
+  const nav = useNavigate();
   const [addProduct, { isLoading }] = useAddProductMutation();
   const { user } = useSelector((state) => state.userSlice);
 
@@ -50,6 +51,7 @@ export default function ProductAddForm() {
               token: user.token
             }).unwrap();
             toast.success('successfully added');
+            nav(-1);
           } catch (err) {
             toast.error(err.data?.message || err.data)
           }
