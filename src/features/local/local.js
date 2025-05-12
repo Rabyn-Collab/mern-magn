@@ -18,3 +18,15 @@ export const removeUserFromLocal = () => {
 
 }
 
+
+
+export const setCartsToLocal = (carts) => {
+  localStorage.setItem('carts', JSON.stringify(carts));
+}
+
+export const getCartsFromLocal = () => {
+  const carts = localStorage.getItem('carts');
+  return carts === null ? [] : JSON.parse(carts);
+}
+
+
