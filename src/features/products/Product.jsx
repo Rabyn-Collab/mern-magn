@@ -1,9 +1,10 @@
-import { useParams } from "react-router"
+import { useNavigate, useParams } from "react-router"
 import { useGetProductQuery } from "./productApi";
 import { baseUrl } from "../../app/mainApi";
 import { Button, Card, IconButton, Rating } from "@material-tailwind/react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setToCart } from "../carts/cartSlice";
 
 export default function Product() {
 
@@ -14,7 +15,7 @@ export default function Product() {
   if (isLoading) return <h1>Loading...</h1>
   if (error) return <h1>{error}</h1>
 
-  console.log(data);
+
 
   return (
     <div className="grid grid-cols-3 my-5 gap-5">
@@ -28,7 +29,7 @@ export default function Product() {
         <p>{data.description}</p>
       </div>
 
-      <ProductAddToCart />
+      <ProductAddToCart product={data} />
 
     </div>
   )
@@ -36,12 +37,21 @@ export default function Product() {
 
 
 
-function ProductAddToCart() {
-  const [count, setCount] = useState(0);
+function ProductAddToCart({ product }) {
+  const nav = useNavigate();
+  const { carts } = useSelector((state) => state.cartSlice);
+  const isExistCart = carts.find((cart) => cart._id === product._id);
+
+  const [count, setCount] = useState(isExistCart?.qty || 1);
   const { user } = useSelector((state) => state.userSlice);
 
 
+  const dispatch = useDispatch();
 
+  const handleCart = () => {
+    dispatch(setToCart({ title: product.title, image: product.image, price: product.price, qty: count, _id: product._id }));
+    nav('/carts');
+  }
   return (
     <Card className="flex items-center space-y-7 justify-center">
       <h1>Product Add</h1>
@@ -49,7 +59,7 @@ function ProductAddToCart() {
 
         <IconButton
           onClick={() => setCount(count - 1)}
-          disabled={count === 0}
+          disabled={count === 1}
           size="sm">
           <i className="fas fa-minus" />
         </IconButton>
@@ -63,7 +73,9 @@ function ProductAddToCart() {
         </IconButton>
 
       </div>
-      <Button disabled={!user || user?.role === 'Admin'}>Add To Cart</Button>
+      <Button
+        onClick={handleCart}
+        disabled={!user || user?.role === 'Admin'}>Add To Cart</Button>
     </Card>
   )
 }

@@ -10,15 +10,17 @@ export const cartSlice = createSlice({
   },
   reducers: {
 
-    addToCart: (state, action) => {
-      state.carts.push(action.payload);
+    setToCart: (state, action) => {
+      const isExist = state.carts.find((cart) => cart._id === action.payload._id);
+      if (isExist) {
+        state.carts = state.carts.map((cart) => cart._id === isExist._id ? action.payload : cart);
+      } else {
+        state.carts.push(action.payload);
+      }
       setCartsToLocal(state.carts);
+
     },
 
-    updateCart: (state, action) => {
-      state.carts = state.carts.map((cart) => cart._id === action.payload._id ? action.payload : cart);
-      setCartsToLocal(state.carts);
-    },
 
     removeFromCart: (state, action) => {
       state.carts = state.carts.filter((cart) => cart._id !== action.payload._id);
@@ -26,4 +28,5 @@ export const cartSlice = createSlice({
     },
 
   }
-})
+});
+export const { removeFromCart, setToCart } = cartSlice.actions;

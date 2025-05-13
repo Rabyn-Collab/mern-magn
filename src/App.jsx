@@ -9,6 +9,7 @@ import AdminPage from './features/admin/AdminPage';
 import ProductAddForm from './features/admin/ProductAddForm';
 import ProductEdit from './features/admin/ProductEdit';
 import Product from './features/products/Product';
+import CartPage from './features/carts/CartPage';
 
 
 export default function App() {
@@ -30,6 +31,7 @@ export default function App() {
         { path: 'add-product', element: <ProductAddForm /> },
         { path: 'edit-product/:id', element: <ProductEdit /> },
         { path: 'products/:id', element: <Product /> },
+        { path: 'carts', element: <CartPage /> },
 
       ]
     }
