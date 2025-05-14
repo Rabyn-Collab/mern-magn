@@ -1,16 +1,17 @@
 import { Avatar, Card, IconButton, Typography } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 import { baseUrl } from "../../app/mainApi";
-import { setToCart } from "./cartSlice";
+import { removeFromCart, setToCart } from "./cartSlice";
 const TABLE_HEAD = ["Items", "Price", "Quantity", "Total"];
 
 export default function CartPage() {
   const { carts } = useSelector((state) => state.cartSlice);
+  const dispatch = useDispatch();
   return (
     <div className="p-5">
 
-
-      <Card className="h-full w-full overflow-scroll">
+      {carts.length === 0 && <h1 className="text-center text-3xl">No Items in Cart</h1>}
+      {carts.length > 0 && <Card className="h-full w-full overflow-scroll">
         <table className="w-full min-w-max table-auto text-left">
           <thead>
             <tr>
@@ -64,11 +65,15 @@ export default function CartPage() {
 
                   </td>
                   <td className={classes}>
-                    <div>
+                    <div className="flex items-center">
                       <Typography>
                         Rs. {price * qty}
                       </Typography>
-
+                      <IconButton
+                        onClick={() => dispatch(removeFromCart(_id))}
+                        variant="text">
+                        <i className="fas fa-close" />
+                      </IconButton>
                     </div>
 
                   </td>
@@ -78,6 +83,7 @@ export default function CartPage() {
           </tbody>
         </table>
       </Card>
+      }
 
 
     </div>

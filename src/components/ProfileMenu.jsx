@@ -89,7 +89,13 @@ export default function ProfileMenu({ user }) {
                   case 'Admin Dashboard':
                     nav('/admin-page');
                     break;
+                  case 'Cart':
+                    nav('/carts');
+                    break;
 
+                  case 'Profile':
+                    nav('/user-profile');
+                    break;
                 }
                 closeMenu();
 

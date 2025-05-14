@@ -23,7 +23,7 @@ export const cartSlice = createSlice({
 
 
     removeFromCart: (state, action) => {
-      state.carts = state.carts.filter((cart) => cart._id !== action.payload._id);
+      state.carts = state.carts.filter((cart) => cart._id !== action.payload);
       setCartsToLocal(state.carts);
     },
 

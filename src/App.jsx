@@ -1,4 +1,3 @@
-import React from 'react'
 import { createBrowserRouter } from 'react-router'
 import RootLayout from './components/RootLayout';
 import { RouterProvider } from 'react-router-dom';
@@ -10,6 +9,7 @@ import ProductAddForm from './features/admin/ProductAddForm';
 import ProductEdit from './features/admin/ProductEdit';
 import Product from './features/products/Product';
 import CartPage from './features/carts/CartPage';
+import UserProfile from './features/user/UserProfile.jsx';
 
 
 export default function App() {
@@ -32,6 +32,7 @@ export default function App() {
         { path: 'edit-product/:id', element: <ProductEdit /> },
         { path: 'products/:id', element: <Product /> },
         { path: 'carts', element: <CartPage /> },
+        { path: 'user-profile', element: <UserProfile /> },
 
       ]
     }
