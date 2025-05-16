@@ -16,8 +16,7 @@ export default function AdminPage() {
 
 
   if (isLoading) return <h1>Loading...</h1>
-
-  if (error) return <h1>{error}</h1>
+  if (error) return <h1>{error.data?.message || error?.error}</h1>
 
 
   return (

@@ -8,7 +8,7 @@ export default function UserProfile({ user }) {
   const { data, isLoading, error } = useGetUserQuery(user.token);
   const [updateUser, { isLoading: updateLoading }] = useUpdateUserMutation();
   if (isLoading) return <h1>Loading...</h1>
-  if (error) return <h1>{error}</h1>
+  if (error) return <h1>{error.data?.message || error?.error}</h1>
 
   return (
     <div>

@@ -8,7 +8,7 @@ export default function OrderPage({ user }) {
   const { data, isLoading, error } = useGetUserOrderQuery(user.token);
 
   if (isLoading) return <h1>Loading...</h1>
-  if (error) return <h1>{error}</h1>
+  if (error) return <h1>{error.data?.message || error?.error}</h1>
 
   return (
     <div className="col-span-2">

@@ -5,6 +5,10 @@ import { baseUrl } from '../../app/mainApi';
 export default function Top5Products() {
 
   const { isLoading, error, data } = useGetTop5ProductsQuery();
+
+  if (isLoading) return <h1>Loading...</h1>
+  if (error) return <h1>{error.data?.message || error?.error}</h1>
+
   return (
     <div>
 
