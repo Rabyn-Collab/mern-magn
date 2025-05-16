@@ -9,7 +9,7 @@ import ProductAddForm from './features/admin/ProductAddForm';
 import ProductEdit from './features/admin/ProductEdit';
 import Product from './features/products/Product';
 import CartPage from './features/carts/CartPage';
-import UserProfile from './features/user/UserProfile.jsx';
+import ProfileMainPage from './features/user/ProfileMainPage.jsx';
 
 
 export default function App() {
@@ -32,7 +32,7 @@ export default function App() {
         { path: 'edit-product/:id', element: <ProductEdit /> },
         { path: 'products/:id', element: <Product /> },
         { path: 'carts', element: <CartPage /> },
-        { path: 'user-profile', element: <UserProfile /> },
+        { path: 'user-profile', element: <ProfileMainPage /> },
 
       ]
     }

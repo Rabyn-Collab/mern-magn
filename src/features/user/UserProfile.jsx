@@ -1,11 +1,9 @@
-import { useSelector } from 'react-redux'
 import { useGetUserQuery, useUpdateUserMutation } from './userApi.js';
 import { Formik } from 'formik';
 import { Button, Input } from '@material-tailwind/react';
 import toast from 'react-hot-toast';
 
-export default function UserProfile() {
-  const { user } = useSelector((state) => state.userSlice);
+export default function UserProfile({ user }) {
 
   const { data, isLoading, error } = useGetUserQuery(user.token);
   const [updateUser, { isLoading: updateLoading }] = useUpdateUserMutation();
@@ -13,7 +11,7 @@ export default function UserProfile() {
   if (error) return <h1>{error}</h1>
 
   return (
-    <div className='p-5 max-w-[400px] '>
+    <div>
 
       <Formik
         initialValues={{

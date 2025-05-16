@@ -30,3 +30,8 @@ export const getCartsFromLocal = () => {
 }
 
 
+
+
+export const clearCartsFromLocal = () => {
+  localStorage.removeItem('carts');
+}

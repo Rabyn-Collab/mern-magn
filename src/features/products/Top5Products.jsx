@@ -5,8 +5,6 @@ import { baseUrl } from '../../app/mainApi';
 export default function Top5Products() {
 
   const { isLoading, error, data } = useGetTop5ProductsQuery();
-
-  console.log(data);
   return (
     <div>
 
