@@ -24,7 +24,7 @@ export default function ProductAddForm() {
   const { user } = useSelector((state) => state.userSlice);
 
   return (
-    <div className='max-w-[400px] mt-10'>
+    <div className='max-w-[400px] mt-10 pb-5'>
 
       <Formik
         initialValues={{
@@ -48,7 +48,7 @@ export default function ProductAddForm() {
           try {
             await addProduct({
               body: formData,
-              token: user.token
+              token: user?.token
             }).unwrap();
             toast.success('successfully added');
             nav(-1);

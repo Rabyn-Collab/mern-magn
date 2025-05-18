@@ -27,7 +27,7 @@ export default function ProductEditForm({ product }) {
 
 
   return (
-    <div className='max-w-[400px] mt-10'>
+    <div className='max-w-[400px] mt-10 pb-5'>
 
       <Formik
         initialValues={{
@@ -58,7 +58,7 @@ export default function ProductEditForm({ product }) {
             } else {
               await updateProduct({
                 id: product._id,
-                token: user.token,
+                token: user?.token,
                 body: formData
               }).unwrap();
             }
@@ -67,7 +67,6 @@ export default function ProductEditForm({ product }) {
 
           } catch (err) {
 
-            console.log(err);
 
             toast.error(err.data?.message || err.data)
 
