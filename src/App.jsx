@@ -10,6 +10,7 @@ import ProductEdit from './features/admin/ProductEdit';
 import Product from './features/products/Product';
 import CartPage from './features/carts/CartPage';
 import ProfileMainPage from './features/user/ProfileMainPage.jsx';
+import OrderDetail from './features/orders/OrderDetail.jsx';
 
 
 export default function App() {
@@ -20,22 +21,26 @@ export default function App() {
       path: '/',
       element: <RootLayout />,
       children: [
-        {
-          index: true,
-          element: <HomePage />
-
-        },
+        { index: true, element: <HomePage /> },
         { path: 'login', element: <Login /> },
-        { path: 'signup', element: <SignUp /> },
-        { path: 'admin-page', element: <AdminPage /> },
-        { path: 'add-product', element: <ProductAddForm /> },
-        { path: 'edit-product/:id', element: <ProductEdit /> },
-        { path: 'products/:id', element: <Product /> },
-        { path: 'carts', element: <CartPage /> },
-        { path: 'user-profile', element: <ProfileMainPage /> },
+        { path: 'sign-up', element: <SignUp /> },
 
-      ]
-    }
+        // Admin Routes
+        { path: 'admin/dashboard', element: <AdminPage /> },
+        { path: 'admin/products/add', element: <ProductAddForm /> },
+        { path: 'admin/products/edit/:id', element: <ProductEdit /> },
+
+        // Product & Cart
+        { path: 'products/:id', element: <Product /> },
+        { path: 'cart', element: <CartPage /> },
+
+        // User Profile
+        { path: 'user/profile', element: <ProfileMainPage /> },
+
+        // Orders
+        { path: 'orders/:id', element: <OrderDetail /> },
+      ],
+    },
   ]);
   return <RouterProvider router={router} />
 }

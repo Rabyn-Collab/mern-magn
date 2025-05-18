@@ -23,7 +23,7 @@ export default function AdminPage() {
     <div className=''>
 
       <div className='flex justify-end my-5'>
-        <NavLink to={'/add-product'}>
+        <NavLink to={'/admin/products/add'}>
           <Button color='purple'>Add Product</Button>
         </NavLink>
 
@@ -86,7 +86,7 @@ export default function AdminPage() {
                     </Typography>
                   </td>
                   <td className={classes}>
-                    <NavLink to={`/edit-product/${_id}`} >
+                    <NavLink to={`/admin/products/edit/${_id}`} >
                       <IconButton size='sm' color='green'>
                         <i className="fas fa-edit" />
                       </IconButton>

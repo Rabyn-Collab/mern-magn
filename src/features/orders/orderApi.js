@@ -15,7 +15,15 @@ const orderApi = mainApi.injectEndpoints({
         },
         method: 'GET',
       }),
-      providesTags: ['User']
+      providesTags: ['Orders']
+    }),
+
+    getOrderDetail: builder.query({
+      query: (id) => ({
+        url: `/orders/${id}`,
+        method: 'GET',
+      }),
+      providesTags: ['Orders']
     }),
 
 
@@ -29,11 +37,11 @@ const orderApi = mainApi.injectEndpoints({
         },
         method: 'POST',
       }),
-      providesTags: ['User']
+      providesTags: ['Orders']
     }),
 
   })
 });
 
 
-export const { useGetOrdersQuery, useGetUserOrderQuery, useAddOrderMutation } = orderApi;
+export const { useGetOrdersQuery, useGetUserOrderQuery, useAddOrderMutation, useGetOrderDetailQuery } = orderApi;

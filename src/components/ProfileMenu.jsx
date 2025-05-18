@@ -87,14 +87,14 @@ export default function ProfileMenu({ user }) {
                     dispatch(removeUser());
                     break;
                   case 'Admin Dashboard':
-                    nav('/admin-page');
+                    nav('/admin/dashboard');
                     break;
                   case 'Cart':
-                    nav('/carts');
+                    nav('/cart');
                     break;
 
                   case 'Profile':
-                    nav('/user-profile');
+                    nav('/user/profile');
                     break;
                 }
                 closeMenu();
