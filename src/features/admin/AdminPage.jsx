@@ -57,7 +57,7 @@ export default function AdminPage() {
               const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
               return (
-                <tr key={name}>
+                <tr key={_id}>
                   <td className={classes}>
                     <Typography
                       variant="small"

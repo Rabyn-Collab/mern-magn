@@ -90,7 +90,7 @@ export default function ProfileMenu({ user }) {
                     nav('/admin/dashboard');
                     break;
                   case 'Cart':
-                    nav('/cart');
+                    nav('/carts');
                     break;
 
                   case 'Profile':

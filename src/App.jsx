@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router'
+import { createBrowserRouter, Navigate } from 'react-router'
 import RootLayout from './components/RootLayout';
 import { RouterProvider } from 'react-router-dom';
 import Login from './features/authentication/Login';
@@ -11,10 +11,14 @@ import Product from './features/products/Product';
 import CartPage from './features/carts/CartPage';
 import ProfileMainPage from './features/user/ProfileMainPage.jsx';
 import OrderDetail from './features/orders/OrderDetail.jsx';
+import AdminRoute from './components/AdminRoute.jsx';
+import UserRoute from './components/UserRoute.jsx';
+import { useSelector } from 'react-redux';
 
 
 export default function App() {
 
+  const { user } = useSelector((state) => state.userSlice);
 
   const router = createBrowserRouter([
     {
@@ -22,20 +26,34 @@ export default function App() {
       element: <RootLayout />,
       children: [
         { index: true, element: <HomePage /> },
-        { path: 'login', element: <Login /> },
-        { path: 'sign-up', element: <SignUp /> },
+
+        { path: 'login', element: user ? <Navigate to="/" /> : <Login /> },
+        { path: 'sign-up', element: user ? <Navigate to="/" /> : <SignUp /> },
 
         // Admin Routes
-        { path: 'admin/dashboard', element: <AdminPage /> },
-        { path: 'admin/products/add', element: <ProductAddForm /> },
-        { path: 'admin/products/edit/:id', element: <ProductEdit /> },
+        {
+          element: <AdminRoute />,
+          children: [
+            { path: 'admin/dashboard', element: <AdminPage /> },
+            { path: 'admin/products/add', element: <ProductAddForm /> },
+            { path: 'admin/products/edit/:id', element: <ProductEdit /> },
+          ]
+        },
+
 
         // Product & Cart
         { path: 'products/:id', element: <Product /> },
-        { path: 'cart', element: <CartPage /> },
 
-        // User Profile
-        { path: 'user/profile', element: <ProfileMainPage /> },
+        {
+          element: <UserRoute />,
+          children: [
+            { path: 'carts', element: <CartPage /> },
+            // User Profile
+            { path: 'user/profile', element: <ProfileMainPage /> },
+          ]
+        },
+
+
 
         // Orders
         { path: 'orders/:id', element: <OrderDetail /> },
