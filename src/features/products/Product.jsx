@@ -5,11 +5,13 @@ import { Button, Card, IconButton, Rating } from "@material-tailwind/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setToCart } from "../carts/cartSlice";
+import AddReview from "../user/AddReview.jsx";
+import ReviewList from "../user/ReviewList.jsx";
 
 export default function Product() {
 
   const { id } = useParams();
-
+  const { user } = useSelector((state) => state.userSlice);
   const { data, isLoading, error } = useGetProductQuery(id);
 
   if (isLoading) return <h1>Loading...</h1>
@@ -18,19 +20,22 @@ export default function Product() {
 
 
   return (
-    <div className="grid grid-cols-3 my-5 gap-5">
-      <div>
-        <img src={`${baseUrl}${data.image}`} alt="" />
-      </div>
-      <div className="space-y-3">
-        <h2 className="font-medium">{data.title}</h2>
-        <p className="text-red-400">Rs.{data.price}</p>
-        <Rating readonly value={data.rating} />
-        <p>{data.description}</p>
+    <div>
+      <div className="grid grid-cols-3 my-5 gap-5">
+        <div>
+          <img src={`${baseUrl}${data.image}`} alt="" />
+        </div>
+        <div className="space-y-3">
+          <h2 className="font-medium">{data.title}</h2>
+          <p className="text-red-400">Rs.{data.price}</p>
+          <Rating readonly value={data.rating} />
+          <p>{data.description}</p>
+        </div>
+        <ProductAddToCart product={data} />
       </div>
 
-      <ProductAddToCart product={data} />
-
+      {user && user?.role === 'User' && <AddReview id={data._id} />}
+      <ReviewList product={data} />
     </div>
   )
 }

@@ -67,6 +67,17 @@ export const productApi = mainApi.injectEndpoints({
       }),
       invalidatesTags: ['Product']
     }),
+    addReview: builder.mutation({
+      query: (q) => ({
+        url: `/products/reviews/${q.id}`,
+        body: q.body,
+        method: 'PATCH',
+        headers: {
+          Authorization: q.token
+        }
+      }),
+      invalidatesTags: ['Product']
+    }),
 
 
   })
@@ -74,4 +85,4 @@ export const productApi = mainApi.injectEndpoints({
 });
 
 
-export const { useGetProductsQuery, useGetTop5ProductsQuery, useAddProductMutation, useRemoveProductMutation, useGetProductQuery, useUpdateProductMutation } = productApi;
+export const { useGetProductsQuery, useGetTop5ProductsQuery, useAddProductMutation, useRemoveProductMutation, useGetProductQuery, useUpdateProductMutation, useAddReviewMutation } = productApi;
