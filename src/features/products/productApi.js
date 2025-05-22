@@ -49,9 +49,9 @@ export const productApi = mainApi.injectEndpoints({
         url: `/products/${q.id}`,
         method: 'PATCH',
         body: q.body,
-        headers: {
-          Authorization: q.token
-        }
+        // headers: {
+        //   Authorization: q.token
+        // }
       }),
       invalidatesTags: ['Product']
     }),
@@ -61,9 +61,9 @@ export const productApi = mainApi.injectEndpoints({
       query: (q) => ({
         url: `/products/${q.id}`,
         method: 'DELETE',
-        headers: {
-          Authorization: q.token
-        }
+        // headers: {
+        //   Authorization: q.token
+        // }
       }),
       invalidatesTags: ['Product']
     }),
@@ -72,9 +72,9 @@ export const productApi = mainApi.injectEndpoints({
         url: `/products/reviews/${q.id}`,
         body: q.body,
         method: 'PATCH',
-        headers: {
-          Authorization: q.token
-        }
+        // headers: {
+        //   Authorization: q.token
+        // }
       }),
       invalidatesTags: ['Product']
     }),

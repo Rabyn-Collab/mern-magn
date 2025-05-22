@@ -11,7 +11,7 @@ export default function RemoveButton({ id }) {
     try {
       await removeProduct({
         id,
-        token: user?.token
+        // token: user?.token
       }).unwrap();
       toast.success('successfully removed');
     } catch (err) {
