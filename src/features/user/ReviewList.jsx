@@ -31,7 +31,7 @@ export default function ReviewList({ product }) {
                 <Typography variant="h5" color="blue-gray">
                   {review.username}
                 </Typography>
-                <Rating value={review.rating} readOnly />
+                <Rating readonly value={review.rating} />
 
               </div>
 

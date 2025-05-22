@@ -28,7 +28,7 @@ export default function Product() {
         <div className="space-y-3">
           <h2 className="font-medium">{data.title}</h2>
           <p className="text-red-400">Rs.{data.price}</p>
-          <Rating readonly value={data.rating} />
+          <Rating readonly value={Math.round(data.rating)} />
           <p>{data.description}</p>
         </div>
         <ProductAddToCart product={data} />

@@ -23,7 +23,7 @@ export default function ProductList() {
           <div className='px-4 py-2 space-y-1'>
             <h2 className='font-medium'>{title}</h2>
             <p className='text-red-400'>Rs.{price}</p>
-            <Rating readonly value={rating} />
+            <Rating readonly value={Math.round(rating)} />
           </div>
 
 
