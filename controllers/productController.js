@@ -57,7 +57,7 @@ export const getProducts = async (req, res) => {
     const skip = (page - 1) * 10;
 
     const total = await Product.countDocuments();
-    const products = await query.skip(skip).limit(limit);
+    const products = await query.skip(skip).limit(limit).sort({ createdAt: -1 });
 
     return res.status(200).json({
       products,
@@ -78,7 +78,7 @@ export const getProduct = (req, res) => {
 }
 export const getProductByCategory = async (req, res) => {
   const { category } = req.params
-  console.log(category);
+
   try {
     const products = await Product.find({ category });
     return res.status(200).json(products);
