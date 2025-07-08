@@ -158,8 +158,9 @@ export const removeProduct = async (req, res) => {
     fs.unlink(`./uploads${product.image}`, async (imageErr) => {
       if (imageErr) return res.status(400).json({ message: `${imageErr}` });
       await Product.findByIdAndDelete(product._id);
+      return res.status(200).json({ message: 'product removed successfully' });
     })
-    return res.status(200).json({ message: 'product removed successfully' });
+
   } catch (err) {
     return res.status(400).json({ message: `${err}` });
 
