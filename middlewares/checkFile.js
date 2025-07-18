@@ -8,7 +8,7 @@ const supportedTypes = ['.png', '.jpeg', '.jpg', '.gif', '.webp'];
 
 export const fileCheck = (req, res, next) => {
   const file = req.files?.image;
-  console.log(file);
+
 
   if (file) {
     const extName = path.extname(file.name);
