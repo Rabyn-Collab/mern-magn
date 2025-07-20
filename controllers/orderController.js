@@ -3,7 +3,6 @@ import Order from "../models/Order.js";
 
 
 export const getOrders = async (req, res) => {
-  console.log(req.role);
   try {
     if (req.role === 'Admin') {
       const orders = await Order.find({});

@@ -24,12 +24,12 @@ export const getProducts = async (req, res) => {
     // console.log(qryStr);
 
 
-    let query = Product.find(queryObject);
 
 
     if (req.query.search) {
+      console.log('hello jee');
 
-      const searchText = req.query.search.toLowerCase();
+      const searchText = req.query.search;
       if (categories.includes(searchText)) {
         queryObject.category = { $regex: searchText, $options: 'i' };
       } else if (brands.includes(searchText)) {
@@ -40,6 +40,8 @@ export const getProducts = async (req, res) => {
 
 
     }
+    let query = Product.find(queryObject);
+
 
     if (req.query.sort) {
       const sorting = req.query.sort.split(/[\s,]+/).filter(Boolean).join(' ');
